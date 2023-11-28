@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskTracker.Domain.Dtos
 {
-    public class CastomTaskDto
+    public class CastomTaskDto : BaseEntityDto
     {
         public string Title { get; set; }
         public string Description { get; set; }
