@@ -1,13 +1,13 @@
-﻿using SimpleChat.Core.Dtos;
-using SimpleChat.Core.Entities;
+﻿using TaskTracker.Domain.Dtos;
+using TaskTracker.Domain.Entities;
 
-namespace SimpleChat.Infrastructure.Mapper
+namespace TaskTracker.Infrastructure.Mapper
 {
     public sealed class MapperEntityToDto : AutoMapper.Profile
     {
         public MapperEntityToDto()
         {
-            CreateMap<Task, TaskDto>().ReverseMap();
+            CreateMap<CastomTask, CastomTaskDto>().ReverseMap();
         }
     }
 }

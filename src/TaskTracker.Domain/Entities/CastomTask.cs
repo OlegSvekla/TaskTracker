@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskTracker.Domain.Entities
 {
-    public class Task : BaseEntity
+    public class CastomTask : BaseEntity
     {
         public string Title { get; set; }
         public string Description { get; set; }

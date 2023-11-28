@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace SimpleChat.Api.Extensions
+namespace TaskTracker.Api.Extensions
 {
     public static class LogsConfiguration
     {

@@ -1,4 +1,7 @@
-﻿namespace TaskTracker.Api.Extensions
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleChat.Infrastructure.Data;
+
+namespace TaskTracker.Api.Extensions
 {
     public static class DbConfiguration
     {
@@ -6,7 +9,7 @@
             IConfiguration configuration,
             IServiceCollection services)
         {
-            services.AddDbContext<TaskTrackerDbContext>(options =>
+            services.AddDbContext<CastomTaskTrackerDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("TaskTrackerDbConnection")));
         }
     }

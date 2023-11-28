@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimpleChat.Infrastructure.Data;
+using TaskTracker.Infrastructure.Data;
 
-namespace SimpleChat.Api.Extensions
+namespace TaskTracker.Api.Extensions
 {
     public static class MigrationsConfiguration
     {
@@ -10,16 +11,16 @@ namespace SimpleChat.Api.Extensions
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var serviceProvider = scope.ServiceProvider;
-                var logger = serviceProvider.GetRequiredService<ILogger<SimpleChatDbContextSeed>>();
+                var logger = serviceProvider.GetRequiredService<ILogger<CastomTaskTrackerDbContextSeed>>();
 
                 logger.LogInformation("Database migration running...");
 
                 try
                 {
-                    var context = serviceProvider.GetRequiredService<SimpleChatDbContext>();
+                    var context = serviceProvider.GetRequiredService<CastomTaskTrackerDbContext>();
                     context.Database.Migrate();
 
-                    await SimpleChatDbContextSeed.SeedAsyncData(context, logger);
+                    await CastomTaskTrackerDbContextSeed.SeedAsyncData(context, logger);
                 }
                 catch (Exception ex)
                 {

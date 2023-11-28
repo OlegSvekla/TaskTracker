@@ -1,15 +1,16 @@
+using TaskTracker.Api.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+LogsConfiguration.Configuration(builder.Configuration, builder.Logging);
+DbConfiguration.Configuration(builder.Configuration, builder.Services);
+ServicesConfiguration.Configuration(builder.Services);
+SwaggerConfiguration.Configuration(builder.Services);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+await app.RunDbContextMigrations();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

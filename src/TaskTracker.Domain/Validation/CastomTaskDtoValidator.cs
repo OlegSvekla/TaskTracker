@@ -8,9 +8,9 @@ using TaskTracker.Domain.Dtos;
 
 namespace TaskTracker.Domain.Validation
 {
-    public class TaskDtoValidator : AbstractValidator<TaskDto>
+    public class CastomTaskDtoValidator : AbstractValidator<CastomTaskDto>
     {
-        public TaskDtoValidator()
+        public CastomTaskDtoValidator()
         {
             RuleFor(task => task.Title)
                 .NotEmpty().WithMessage("The task name cannot be empty.")

@@ -1,20 +1,24 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using SimpleChat.Infrastructure.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TaskTracker.Domain.Entities;
+using TaskTracker.Domain.Interfaces.IRepositories;
 
 namespace TaskTracker.Infrastructure.Data.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly SimpleChatDbContext _dbContext;
+        private readonly CastomTaskTrackerDbContext _dbContext;
         private readonly DbSet<T> _table;
 
         public BaseRepository(
-            SimpleChatDbContext dbContext)
+            CastomTaskTrackerDbContext dbContext)
         {
             _dbContext = dbContext;
             _table = _dbContext.Set<T>();

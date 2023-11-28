@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace SimpleChat.Api.Extensions
+namespace TaskTracker.Api.Extensions
 {
     public static class SwaggerConfiguration
     {
