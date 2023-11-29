@@ -41,7 +41,7 @@ namespace TaskTracker.Bl.Services
         public async Task<bool> CreateAsync(CastomTaskDto castomTaskDto)
         {
             var existingTask = await _castomTaskRepository.GetOneByAsync(expression: u => u.Title == castomTaskDto.Title);
-            if (existingTask != null) return false;
+            if (existingTask is not null) return false;
 
             var castomTask = _mapper.Map<CastomTask>(castomTaskDto);
 
