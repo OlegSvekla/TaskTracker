@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using TaskTracker.Bl.Services;
 using TaskTracker.Domain.Dtos;
 using TaskTracker.Domain.Interfaces.IServices;
 
