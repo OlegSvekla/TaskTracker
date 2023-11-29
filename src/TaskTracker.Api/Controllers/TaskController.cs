@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TaskTracker.Bl.Services;
 using TaskTracker.Domain.Dtos;
 using TaskTracker.Domain.Interfaces.IServices;
@@ -20,18 +21,24 @@ namespace TaskTracker.Api.Controllers
             _castomTaskService = castomTaskService;
             _castomTaskDtoValidator = castomTaskDtoValidator;
         }
-
+    
+        /// <returns>Ok response containing Tasks collection.</returns>
+        /// <response code="200">Returns the list of Tasks.</response> 
+        /// <response code="404">The base is Empty. Tasks weren't found</response>
         [ProducesResponseType(200, Type = typeof(IList<CastomTaskDto>))]
         [ProducesResponseType(404)]
-        //delete 404
         [HttpGet("all")]
         public async Task<ActionResult<IList<CastomTaskDto>>> GetAll()
         {
             var tasks = await _castomTaskService.GetAllAsync();
 
-            return Ok(tasks);
+            return tasks == null ? NotFound("CastomTasks was not found") : Ok(tasks);
         }
 
+        /// <param name="id">ID of the Task to get.</param>
+        /// <returns>Ok response containing a single Task.</returns>
+        /// <response code="200">Returns one Task.</response>
+        /// <response code="404">The Task by Id was not found.</response>
         [ProducesResponseType(200, Type = typeof(CastomTaskDto))]
         [ProducesResponseType(404)]
         [HttpGet("{id}")]
@@ -42,6 +49,9 @@ namespace TaskTracker.Api.Controllers
             return task == null ? NotFound("CastomTask not found by Id") : Ok(task);
         }
 
+        /// <param name="castomTaskDto">The Task to be created.</param>
+        /// <returns>Ok response succesefully created Task in DATA.</returns>
+        /// <response code="201">Task is created.</response>
         [ProducesResponseType(201, Type = typeof(CastomTaskDto))]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CastomTaskDto castomTaskDto)
@@ -57,6 +67,10 @@ namespace TaskTracker.Api.Controllers
             return success == false ? BadRequest("This CastomTask is already existing") : Ok();
         }
 
+        /// <param name = "id" > The ID of the Task to be updated.</param>
+        /// <param name = "castomTaskDto" > The updated Task data.</param>
+        /// <response code = "204" > Task is successfuly updated.</response>
+        /// <response code="404">The Task by Id was not found.</response>
         [ProducesResponseType(204, Type = typeof(CastomTaskDto))]
         [ProducesResponseType(404)]
         [HttpPut("{id:int}/task")]
@@ -73,6 +87,8 @@ namespace TaskTracker.Api.Controllers
             return success == false ? NotFound("CastomTask not found by Id") : NoContent();
         }
 
+        /// <param name="id">The ID of the Task to be removed.</param>
+        /// <response code="404">The Task by Id was not found.</response>
         [ProducesResponseType(404)]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)

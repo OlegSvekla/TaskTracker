@@ -68,7 +68,6 @@ namespace TaskTracker.Infrastructure.Data.Repositories
             return model;
         }
 
-
         public async Task<T> CreateAsync(T entity, CancellationToken cancellationToken = default)
         {
             await _table.AddAsync(entity, cancellationToken);
